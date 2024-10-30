@@ -1,3 +1,5 @@
+const { ipcRenderer } = require('electron'); 
+
 const cards = document.querySelectorAll('.card-container');
 const rowElement = document.querySelector('.row');
 const cardSpacing = 2; 
@@ -63,4 +65,24 @@ cards.forEach((card, index) => {
       });
     }
   });
-  
+
+document.addEventListener('DOMContentLoaded', async () => {
+  const cardsInner = document.querySelectorAll('.card');
+
+  cardsInner.forEach(async (card, index) => {
+    const categoria = `Ingeniería Civil`;
+    const puntaje = 200 * ((index % 6) + 1);
+    console.log(index + " " + index % 6);
+
+    try {
+      const pregunta = await ipcRenderer.invoke('obtener-pregunta', categoria, puntaje);
+      console.log(`Pregunta para ${categoria}, ${puntaje}:`, pregunta);
+
+      if (pregunta) {
+        card.querySelector('.back h2').textContent = pregunta.pregunta;
+      }
+    } catch (error) {
+      console.error('Error obteniendo la pregunta desde el renderer:', error);
+    }
+  });
+});
