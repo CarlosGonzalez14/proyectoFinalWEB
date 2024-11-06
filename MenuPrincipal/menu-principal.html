@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jornadas de Ingeniería</title>
+</head>
+<body>
+    <button id="open-jeopardy">Abrir Jeopardy</button>
+    <button id="open-100-leones">Abrir 100 Leones</button>
+  
+    <script>
+      const { ipcRenderer } = require('electron');
+      
+      document.getElementById('open-jeopardy').addEventListener('click', () => {
+        ipcRenderer.send('launch-jeopardy');
+      });
+
+      document.getElementById('open-100-leones').addEventListener('click', () => {
+        ipcRenderer.send('launch-100-leones');
+      });
+    </script>
+</body>
+</html>

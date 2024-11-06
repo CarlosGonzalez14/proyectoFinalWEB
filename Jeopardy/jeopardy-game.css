@@ -1,0 +1,155 @@
+body, html {
+  background: #007bff;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+@font-face {
+  font-family: 'SevenSegment';
+  src: url('../fonts/SevenSegment.ttf') format('truetype'); 
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tablero';
+  src: url('../fonts/Swiss 911 Compressed Regular.otf') format('truetype'); 
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Preguntas';
+  src: url('../fonts/KorinnaStd-Bold.ttf') format('truetype'); 
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1{
+  font-family: 'Preguntas';
+}
+
+h2{
+  font-family: 'Tablero';
+}
+
+.row {
+  position: relative;
+  width: 100vw;
+  height: 90vh;
+  /* border-style: solid;
+  border-color: greenyellow;
+  border-width: 20px; */
+}
+
+.score-bar{
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  /* border-style: solid;
+  border-color: orange;
+  border-width: 2px; */
+}
+
+.score{
+  width: 15%;
+  height: 100%;
+  background-color: black;
+  /* background-color: white; */
+  text-align: center;
+  align-content: center;
+  font-family: 'SevenSegment';
+}
+
+@media (max-width: 2928px) { .score {font-size: 5em;} }
+
+@media (max-width: 2496px) { .score {font-size: 4.5em;} }
+
+@media (max-width: 2064px) { .score {font-size: 4em;} }
+
+@media (max-width: 1632px) { .score {font-size: 3.5em;} }
+
+@media (max-width: 1200px) { .score {font-size: 3em;} }
+
+@media (max-width: 768px) { .score {font-size: 2.5em;} }
+
+@media (max-width: 336px) { .score {font-size: 2em;} }
+
+.team-one{
+  color: blue;
+  border-style: solid;
+  border-color: blue;
+  border-width: 2px;
+}
+
+.team-two{
+  color: red;
+  border-style: solid;
+  border-color: red;
+  border-width: 2px;
+}
+
+.team-three{
+  color: lime;
+  border-style: solid;
+  border-color: lime;
+  border-width: 2px;
+}
+
+.card-container {
+  position: absolute;
+  width: 15vw;
+  height: 14vh; 
+  transition: transform 0.6s ease-in-out, width 0.6s ease-in-out, height 0.6s ease-in-out, top 0.6s ease-in-out, left 0.6s ease-in-out, z-index 0.1s ease-in-out 0.6s; /* El z-index cambia después de la animación */
+  transform-origin: center center;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out;
+}
+
+.card-container.hover {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+
+.card-container .card {
+  transform: rotateY(0deg);
+}
+
+.card-container.hover .card {
+  transform: rotateY(180deg);
+}
+
+.front, .back {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.front {
+  background-color: #aaa;
+}
+
+.back {
+  background-color: #f8f8f8;
+  transform: rotateY(180deg);
+}
