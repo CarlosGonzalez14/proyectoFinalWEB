@@ -1,0 +1,52 @@
+:root {
+    --blue-primary: #1B6BF2;
+    --red-primary: #F02000;
+    --green-primary: #AEF000;
+}
+
+h1, h2, h3 {
+    text-align: center;
+}
+
+.button {
+    border-radius: 50px;
+    background-color: lightgray;
+}
+
+.button :hover{
+    cursor: pointer;
+}
+
+.team-section {
+    font-size: 1.5em;
+    margin: 10px 0;
+    border-color: black;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.select-section{
+    display: flex;
+}
+
+.button-section {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.button-section :hover{
+    cursor: pointer;
+}
+
+.team-blue {
+    fill: var(--blue-primary);
+}
+
+.team-red {
+    fill: var(--red-primary);
+}
+
+.team-green {
+    fill: var(--green-primary);
+}
