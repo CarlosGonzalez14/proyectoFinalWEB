@@ -14,7 +14,6 @@ export function handleButtonClick(button) {
   
         ipcRenderer.send('update-score', { isCorrect, teamClass });
   
-        // Desactiva todos los botones
         sibling.classList.add('pressed');
       });
     }
