@@ -140,6 +140,7 @@ h1, h2, h3 {
       transform
       250ms
       cubic-bezier(.3, .7, .4, 1.5);
+    cursor: pointer;
   }
   
   .button-82-pushable:active .button-82-front {
