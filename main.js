@@ -72,7 +72,7 @@ function createJeopardy() {
   });
 
   controlsJeopardyWindow.loadURL(url.format({
-    pathname: path.join(__dirname, '/jeopardy/jeopardy-controls.html'),
+    pathname: path.join(__dirname, '/jeopardy/jeopardy-controls-empty.html'),
     protocol: 'file',
     slashes: true
   }));
@@ -179,5 +179,63 @@ ipcMain.handle('obtener-pregunta', async (event, categoria, puntaje) => {
   } catch (error) {
     console.error('Error obteniendo pregunta:', error);
     throw error;
+  }
+});
+
+let scores = {
+  'team-one': 0,
+  'team-two': 0,
+  'team-three': 0,
+};
+
+ipcMain.on('update-score', (event, { isCorrect, teamClass }) => {
+  const teamMap = {
+    'team-blue': 'team-one',
+    'team-red': 'team-two',
+    'team-green': 'team-three',
+  };
+
+  const teamKey = teamMap[teamClass];
+  const puntaje = currentPuntaje || 0; 
+
+  if (teamKey && mainJeopardyWindow) {
+    const delta = isCorrect ? puntaje : -puntaje/2;
+    
+    scores[teamKey] += delta;
+    console.log('puntaje' + scores[teamKey]);
+
+    mainJeopardyWindow.webContents.send('update-team-score', { teamKey, score: scores[teamKey] });
+  }
+});
+
+ipcMain.on('card-clicked', (event, puntaje) => {
+  currentPuntaje = puntaje || 0;
+  if (controlsJeopardyWindow) {
+    controlsJeopardyWindow.webContents.send('update-puntaje', puntaje);
+  }
+});
+
+ipcMain.on('replace-controls-content', () => {
+  if (controlsJeopardyWindow) {
+    const newContentPath = path.join(__dirname, '/jeopardy/jeopardy-controls.html');
+    controlsJeopardyWindow.loadURL(url.format({
+      pathname: newContentPath,
+      protocol: 'file',
+      slashes: true,
+    }));
+    controlsJeopardyWindow.webContents.once('did-finish-load', () => {
+      mainJeopardyWindow.webContents.send('content-replaced');
+    });
+  }
+});
+
+ipcMain.on('empty-controls-content', () => {
+  if (controlsJeopardyWindow) {
+    const newContentPath = path.join(__dirname, '/jeopardy/jeopardy-controls-empty.html');
+    controlsJeopardyWindow.loadURL(url.format({
+      pathname: newContentPath,
+      protocol: 'file',
+      slashes: true,
+    }));
   }
 });

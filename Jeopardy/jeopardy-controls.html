@@ -5,12 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controles Jeopardy</title>
     <link rel="stylesheet" href="jeopardy-controls.css">
+    <script type="module">
+        import { handleButtonClick } from './jeopardy-controls.js';
+        window.handleButtonClick = handleButtonClick;
+    </script>
+    <script>
+    const { ipcRenderer } = require('electron');
+    
+    ipcRenderer.on('update-puntaje', (event, puntaje) => {
+        document.getElementById('puntaje').textContent = puntaje;
+    });
+    </script>
 </head>
 <body>
+    <div id="puntaje-display">
+        <h1>Puntaje: <span id="puntaje">0</span></h1>
+    </div>
     <div class="team-section">
         <h2>Equipo Azul</h2>
         <div class="select-section">
-            <div class="button-section">
+            <div class="button-section correct-answer team-blue" onClick="handleButtonClick(this)">
                 <svg class="team-blue" viewBox="-1.2 -1.2 26.40 26.40" xmlns="http://www.w3.org/2000/svg" stroke-width="0.00024000000000000003" transform="rotate(0)">
                     <g id="SVGRepo_bgCarrier" stroke-width="0">
                         <rect x="-1.2" y="-1.2" width="26.40" height="26.40" rx="13.2" fill="#ffffff" strokewidth="0"></rect>
@@ -22,7 +36,7 @@
                 </svg>
                 <h3>Respuesta Correcta</h3>
             </div>
-            <div class="button-section">
+            <div class="button-section incorrect-answer team-blue" onClick="handleButtonClick(this)">
                 <svg viewBox="-3.2 -3.2 38.40 38.40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="#1B6BF2" stroke="#1B6BF2"><g id="SVGRepo_bgCarrier" stroke-width="0" transform="translate(0,0), scale(1)">
                     <rect x="-3.2" y="-3.2" width="38.40" height="38.40" rx="19.2" fill="#ffffff" strokewidth="0"></rect>
                 </g>
@@ -45,7 +59,7 @@
     <div class="team-section">
         <h2>Equipo Rojo</h2>
         <div class="select-section">
-            <div class="button-section">
+            <div class="button-section correct-answer team-red" onClick="handleButtonClick(this)">
                 <svg class="team-red" viewBox="-1.2 -1.2 26.40 26.40" xmlns="http://www.w3.org/2000/svg" stroke-width="0.00024000000000000003" transform="rotate(0)">
                     <g id="SVGRepo_bgCarrier" stroke-width="0">
                         <rect x="-1.2" y="-1.2" width="26.40" height="26.40" rx="13.2" fill="#ffffff" strokewidth="0"></rect>
@@ -56,7 +70,7 @@
                 </svg>
                 <h3>Respuesta Correcta</h3>
             </div>
-            <div class="button-section">
+            <div class="button-section incorrect-answer team-red" onClick="handleButtonClick(this)">
                 <svg viewBox="-3.2 -3.2 38.40 38.40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="#1B6BF2" stroke="#1B6BF2"><g id="SVGRepo_bgCarrier" stroke-width="0" transform="translate(0,0), scale(1)">
                     <rect x="-3.2" y="-3.2" width="38.40" height="38.40" rx="19.2" fill="#ffffff" strokewidth="0"></rect>
                     </g>
@@ -79,7 +93,7 @@
     <div class="team-section">
         <h2>Equipo Verde</h2>
         <div class="select-section">
-            <div class="button-section">
+            <div class="button-section correct-answer team-green" onClick="handleButtonClick(this)">
                 <svg class="team-green" viewBox="-1.2 -1.2 26.40 26.40" xmlns="http://www.w3.org/2000/svg" stroke-width="0.00024000000000000003" transform="rotate(0)">
                     <g id="SVGRepo_bgCarrier" stroke-width="0">
                         <rect x="-1.2" y="-1.2" width="26.40" height="26.40" rx="13.2" fill="#ffffff" strokewidth="0"></rect>
@@ -90,7 +104,7 @@
                 </svg>
                 <h3>Respuesta Correcta</h3>
             </div>
-            <div class="button-section">
+            <div class="button-section incorrect-answer team-green" onClick="handleButtonClick(this)">
                 <svg viewBox="-3.2 -3.2 38.40 38.40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns" fill="#1B6BF2" stroke="#1B6BF2"><g id="SVGRepo_bgCarrier" stroke-width="0" transform="translate(0,0), scale(1)">
                     <rect x="-3.2" y="-3.2" width="38.40" height="38.40" rx="19.2" fill="#ffffff" strokewidth="0"></rect>
                 </g>
@@ -110,8 +124,13 @@
             </div>
         </div>
     </div>
-    <div class="button">
-        <h2>Terminar turno</h2>
-    </div>
+    <button class="button-82-pushable" role="button">
+        <span class="button-82-shadow"></span>
+        <span class="button-82-edge"></span>
+        <span class="button-82-front text">
+        Button 82
+        </span>
+    </button>
+    <script type="module" src="jeopardy-controls.js"></script>
 </body>
 </html>

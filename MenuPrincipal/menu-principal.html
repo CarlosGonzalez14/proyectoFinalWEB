@@ -6,8 +6,20 @@
     <title>Jornadas de Ingeniería</title>
 </head>
 <body>
-    <button id="open-jeopardy">Abrir Jeopardy</button>
-    <button id="open-100-leones">Abrir 100 Leones</button>
+    <div class="container">
+      <div id="open-jeopardy" class="button" onmouseover="playVideo('video1')" onmouseout="pauseVideo('video1')">
+        <video id="video1" muted loop>
+          <source src="images/Jeo.mp4" type="video/mp4">
+          Tu navegador no soporta video.
+        </video>
+      </div>
+      <div id="open-100-leones" class="button" onmouseover="playVideo('video2')" onmouseout="pauseVideo('video2')">
+        <video id="video2" muted loop>
+          <source src="images/100.mp4" type="video/mp4">
+          Tu navegador no soporta video.
+        </video>
+      </div>
+    </div>
   
     <script>
       const { ipcRenderer } = require('electron');
@@ -20,5 +32,6 @@
         ipcRenderer.send('launch-100-leones');
       });
     </script>
+    <script src="menu-principal.js"></script>
 </body>
 </html>

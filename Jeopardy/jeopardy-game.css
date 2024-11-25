@@ -5,6 +5,12 @@ body, html {
   overflow: hidden;
 }
 
+body, h1, h2, h3, p, span {
+  cursor: default;
+  user-select: none;
+}
+
+
 @font-face {
   font-family: 'SevenSegment';
   src: url('../fonts/SevenSegment.ttf') format('truetype'); 
@@ -148,6 +154,11 @@ h2{
 .front {
   background-color: #aaa;
 }
+
+.front.clickable {
+  cursor: pointer;
+}
+
 
 .back {
   background-color: #f8f8f8;

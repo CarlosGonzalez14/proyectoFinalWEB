@@ -42,39 +42,53 @@ resizeObserver.observe(rowElement);
 recalculateCardSizes();
 
 cards.forEach((card, index) => {
-    if (index >= 6) {
-      card.addEventListener('click', () => {
-        if (!card.classList.contains('hover')) {
-          card.classList.add('hover');
-          card.style.left = '0';
-          card.style.top = '0';
-          card.style.width = `${rowElement.offsetWidth}px`;
-          card.style.height = `${rowElement.offsetHeight}px`;
-          card.style.zIndex = 999;
-        } else {
-          card.classList.remove('hover');
-          card.style.left = card.dataset.originalLeft;
-          card.style.top = card.dataset.originalTop;
-          card.style.width = `${rowElement.offsetWidth / 6 - cardSpacing}px`;
-          card.style.height = `${rowElement.offsetHeight / 6 - cardSpacing}px`;
-  
-          setTimeout(() => {
-            card.style.zIndex = '';
-          }, 600);
-        }
-      });
-    }
-  });
+  if (index >= 6) {
+    card.addEventListener('click', async (event) => {
+      const target = event.target;
+      const puntaje = 200 * Math.floor(index/6);
+
+      if (target.classList.contains('front')) {
+        ipcRenderer.send('replace-controls-content');
+        ipcRenderer.once('content-replaced', () => {
+          ipcRenderer.send('card-clicked', puntaje);
+        });
+      } 
+      else if (target.classList.contains('back')) {
+        ipcRenderer.send('empty-controls-content');
+      }
+
+      if (!card.classList.contains('hover')) {
+        card.classList.add('hover');
+        card.style.left = '0';
+        card.style.top = '0';
+        card.style.width = `${rowElement.offsetWidth}px`;
+        card.style.height = `${rowElement.offsetHeight}px`;
+        card.style.zIndex = 999;
+      } else {
+        card.classList.remove('hover');
+        card.style.left = card.dataset.originalLeft;
+        card.style.top = card.dataset.originalTop;
+        card.style.width = `${rowElement.offsetWidth / 6 - cardSpacing}px`;
+        card.style.height = `${rowElement.offsetHeight / 6 - cardSpacing}px`;
+
+        setTimeout(() => {
+          card.style.zIndex = '';
+        }, 600);
+      }
+    });
+  }
+});
 
 document.addEventListener('DOMContentLoaded', async () => {
   const cardsInner = document.querySelectorAll('.card');
 
   cardsInner.forEach(async (card, index) => {
-    const categoria = `Ingeniería Civil`;
-    const puntaje = 200 * ((index % 6) + 1);
-    console.log(index + " " + index % 6);
+    const categorias = [`Matemáticas básicas`,`Ingeniería en Sistemas`, `Ingeniería Mecatrónica`, `Ingeniería Biomédica`, `Ingeniería Civil`, `Ingeniería Industrial`];
+    const puntaje = 200 * Math.floor(index/6);
 
     try {
+      let categoria = categorias[index%6];
+      console.log("Categoría: " + categoria + " Pregunta: " + puntaje);
       const pregunta = await ipcRenderer.invoke('obtener-pregunta', categoria, puntaje);
       console.log(`Pregunta para ${categoria}, ${puntaje}:`, pregunta);
 
@@ -85,4 +99,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       console.error('Error obteniendo la pregunta desde el renderer:', error);
     }
   });
+});
+
+ipcRenderer.on('update-team-score', (event, { teamKey, score }) => {
+  const scoreElement = document.querySelector(`.score.${teamKey}`);
+  if (scoreElement) {
+    scoreElement.textContent = score.toString(); 
+  }
 });
