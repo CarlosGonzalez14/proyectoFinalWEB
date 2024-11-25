@@ -71,44 +71,62 @@ cards.forEach((card, index) => {
 ipcRenderer.on('finalize-turn', () => {
   const hoveredCards = document.querySelectorAll('.card-container.hover');
 
-  hoveredCards.forEach((card) => {
-    card.classList.remove('hover');
-    card.classList.add('disabled'); 
-    card.style.left = card.dataset.originalLeft;
-    card.style.top = card.dataset.originalTop;
-    card.style.width = `${rowElement.offsetWidth / 6 - cardSpacing}px`;
-    card.style.height = `${rowElement.offsetHeight / 6 - cardSpacing}px`;
-    card.style.cursor = 'default';
+  hoveredCards.forEach((cardContainer) => {
+    const card = cardContainer.querySelector('.card');
+    console.log(card);
+    
+    const backContent = card.querySelector('.back h2');
+    
+    const respuesta = card.dataset.respuesta;
+
+    if (respuesta) {
+      backContent.textContent = "Respuesta: " + respuesta;
+    }
 
     setTimeout(() => {
-      card.style.zIndex = '';
-    }, 600);
+      cardContainer.classList.remove('hover');
+      cardContainer.style.left = cardContainer.dataset.originalLeft;
+      cardContainer.style.top = cardContainer.dataset.originalTop;
+      cardContainer.style.width = `${rowElement.offsetWidth / 6 - cardSpacing}px`;
+      cardContainer.style.height = `${rowElement.offsetHeight / 6 - cardSpacing}px`;
+
+      setTimeout(() => {
+        cardContainer.style.zIndex = '';
+      }, 600); 
+    }, 2000); 
   });
 
   ipcRenderer.send('empty-controls-content');
 });
 
 
-
-
 document.addEventListener('DOMContentLoaded', async () => {
   const cardsInner = document.querySelectorAll('.card');
 
   cardsInner.forEach(async (card, index) => {
-    const categorias = [`Matemáticas básicas`,`Ingeniería en Sistemas`, `Ingeniería Mecatrónica`, `Ingeniería Biomédica`, `Ingeniería Civil`, `Ingeniería Industrial`];
-    const puntaje = 200 * Math.floor(index/6);
+    const categorias = [
+      `Matemáticas básicas`,
+      `Ingeniería en Sistemas`,
+      `Ingeniería Mecatrónica`,
+      `Ingeniería Biomédica`,
+      `Ingeniería Civil`,
+      `Ingeniería Industrial`
+    ];
+    const puntaje = 200 * Math.floor(index / 6);
 
     try {
-      let categoria = categorias[index%6];
-      console.log("Categoría: " + categoria + " Pregunta: " + puntaje);
-      const pregunta = await ipcRenderer.invoke('obtener-pregunta', categoria, puntaje);
-      console.log(`Pregunta para ${categoria}, ${puntaje}:`, pregunta);
+      const categoria = categorias[index % 6];
+      console.log(`Obteniendo datos para categoría "${categoria}", puntaje ${puntaje}`);
 
-      if (pregunta) {
-        card.querySelector('.back h2').textContent = pregunta.pregunta;
+      const { pregunta, respuesta } = await ipcRenderer.invoke('obtener-pregunta', categoria, puntaje);
+
+      if (pregunta && respuesta) {
+        card.querySelector('.back h2').textContent = pregunta; 
+        card.dataset.respuesta = respuesta;
+        console.log(card);
       }
     } catch (error) {
-      console.error('Error obteniendo la pregunta desde el renderer:', error);
+      console.error('Error obteniendo los datos desde el renderer:', error);
     }
   });
 });
@@ -118,22 +136,4 @@ ipcRenderer.on('update-team-score', (event, { teamKey, score }) => {
   if (scoreElement) {
     scoreElement.textContent = score.toString(); 
   }
-});
-
-ipcRenderer.on('finalize-turn', () => {
-  const hoveredCards = document.querySelectorAll('.card-container.hover');
-
-  hoveredCards.forEach((card) => {
-    card.classList.remove('hover');
-    card.style.left = card.dataset.originalLeft;
-    card.style.top = card.dataset.originalTop;
-    card.style.width = `${rowElement.offsetWidth / 6 - cardSpacing}px`;
-    card.style.height = `${rowElement.offsetHeight / 6 - cardSpacing}px`;
-
-    setTimeout(() => {
-      card.style.zIndex = '';
-    }, 600);
-  });
-
-  ipcRenderer.send('empty-controls-content');
 });
