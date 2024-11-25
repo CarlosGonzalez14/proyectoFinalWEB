@@ -85,6 +85,7 @@ ipcRenderer.on('finalize-turn', () => {
 
     setTimeout(() => {
       cardContainer.classList.remove('hover');
+      cardContainer.classList.add('disabled');
       cardContainer.style.left = cardContainer.dataset.originalLeft;
       cardContainer.style.top = cardContainer.dataset.originalTop;
       cardContainer.style.width = `${rowElement.offsetWidth / 6 - cardSpacing}px`;
