@@ -1,166 +1,163 @@
 :root {
-    --blue-primary: #1B6BF2;
-    --red-primary: #F02000;
-    --green-primary: #AEF000;
+  --blue-primary: #1E88E5;
+  --red-primary: #e53935;
+  --green-primary: #66bb6a;
+  --red-exit: hsl(345deg 100% 47%);
+  --gray-light: #d3d3d3;
+  --gray-dark: #a9a9a9;
 }
 
 body, h1, h2, h3, p, span {
-    cursor: default;
-    user-select: none;
-} 
+  cursor: default;
+  user-select: none;
+}
 
 h1, h2, h3 {
-    text-align: center;
+  text-align: center;
 }
 
-.button {
-    border-radius: 50px;
-    background-color: lightgray;
-}
-
-.button :hover{
-    cursor: pointer;
-}
-
-.team-section {
-    font-size: 1.5em;
-    margin: 10px 0;
-    border-color: black;
-    border-width: 2px;
-    border-style: solid;
-}
-
-.select-section{
-    display: flex;
-}
-
-.button-section {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-}
-
-.button-section :hover{
-    cursor: pointer;
-}
-
-.button-deactivated {
-    fill: #ccc;
-    color: #ccc;
-}
-
-.team-blue {
-    fill: var(--blue-primary);
-}
-
-.team-red {
-    fill: var(--red-primary);
-}
-
-.team-green {
-    fill: var(--green-primary);
+.select-section {
+  display: flex;
+  gap: 10px; 
+  justify-content: center;
+  margin: 10px 0;
 }
 
 .button-82-pushable {
-    position: relative;
-    border: none;
-    background: transparent;
-    padding: 0;
-    cursor: pointer;
-    outline-offset: 4px;
-    transition: filter 250ms;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-  }
-  
-  .button-82-shadow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 12px;
-    background: hsl(0deg 0% 0% / 0.25);
-    will-change: transform;
-    transform: translateY(2px);
-    transition:
-      transform
-      600ms
-      cubic-bezier(.3, .7, .4, 1);
-  }
-  
-  .button-82-edge {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 12px;
-    background: linear-gradient(
-      to left,
-      hsl(340deg 100% 16%) 0%,
-      hsl(340deg 100% 32%) 8%,
-      hsl(340deg 100% 32%) 92%,
-      hsl(340deg 100% 16%) 100%
-    );
-  }
-  
-  .button-82-front {
-    display: block;
-    position: relative;
-    padding: 12px 27px;
-    border-radius: 12px;
-    font-size: 1.1rem;
-    color: white;
-    background: hsl(345deg 100% 47%);
-    will-change: transform;
-    transform: translateY(-4px);
-    transition:
-      transform
-      600ms
-      cubic-bezier(.3, .7, .4, 1);
-  }
-  
-  @media (min-width: 768px) {
-    .button-82-front {
-      font-size: 1.25rem;
-      padding: 12px 42px;
-    }
-  }
-  
-  .button-82-pushable:hover {
-    filter: brightness(110%);
-    -webkit-filter: brightness(110%);
-  }
-  
-  .button-82-pushable:hover .button-82-front {
-    transform: translateY(-6px);
-    transition:
-      transform
-      250ms
-      cubic-bezier(.3, .7, .4, 1.5);
-    cursor: pointer;
-  }
-  
-  .button-82-pushable:active .button-82-front {
-    transform: translateY(-2px);
-    transition: transform 34ms;
-  }
-  
-  .button-82-pushable:hover .button-82-shadow {
-    transform: translateY(4px);
-    transition:
-      transform
-      250ms
-      cubic-bezier(.3, .7, .4, 1.5);
-  }
-  
-  .button-82-pushable:active .button-82-shadow {
-    transform: translateY(1px);
-    transition: transform 34ms;
-  }
-  
-  .button-82-pushable:focus:not(:focus-visible) {
-    outline: none;
-  }
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: 4px;
+  transition: filter 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-82-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: hsl(0deg 0% 0% / 0.25);
+  will-change: transform;
+  transform: translateY(2px);
+  transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+}
+
+.button-82-edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: linear-gradient(
+    to left,
+    hsl(340deg 100% 16%) 0%,
+    hsl(340deg 100% 32%) 8%,
+    hsl(340deg 100% 32%) 92%,
+    hsl(340deg 100% 16%) 100%
+  );
+}
+
+.button-82-front {
+  cursor: pointer;
+  display: block;
+  position: relative;
+  padding: 12px 27px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  color: white;
+  font-weight: bold;
+  background: var(--red-exit);
+  will-change: transform;
+  transform: translateY(-4px);
+  transition: transform 600ms cubic-bezier(.3, .7, .4, 1);
+}
+
+.team-blue .button-82-edge {
+  background: linear-gradient(
+    to left,
+    hsl(210deg 77% 21%) 0%,
+    hsl(210deg 77% 41%) 8%,
+    hsl(210deg 77% 41%) 92%,
+    hsl(210deg 77% 21%) 100%
+);
+}
+
+.team-blue .button-82-front {
+  background: var(--blue-primary);
+}
+
+.team-red .button-82-edge {
+  background: linear-gradient(
+    to left,
+    hsl(4deg 74% 25%) 0%,
+    hsl(4deg 74% 45%) 8%,
+    hsl(4deg 74% 45%) 92%,
+    hsl(4deg 74% 25%) 100%
+  );
+}
+
+.team-red .button-82-front {
+  background: var(--red-primary);
+}
+
+.team-green .button-82-edge {
+  background: linear-gradient(
+    to left,
+    hsl(123deg 42% 26%) 0%,
+    hsl(123deg 42% 46%) 8%,
+    hsl(123deg 42% 46%) 92%,
+    hsl(123deg 42% 26%) 100%
+  );
+
+}
+
+.team-green .button-82-front {
+  background: var(--green-primary);
+}
+
+.button-82-pushable:hover {
+  filter: brightness(110%);
+  -webkit-filter: brightness(110%);
+}
+
+.button-82-pushable:hover .button-82-front {
+  transform: translateY(-6px);
+  transition: transform 250ms cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.button-82-pushable:active .button-82-front {
+  transform: translateY(-2px);
+  transition: transform 34ms;
+}
+
+.button-82-pushable:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.button-82-pushable.pressed .button-82-front {
+  background: var(--gray-dark);
+  color: var(--gray-light);
+}
+
+.button-82-pushable.pressed .button-82-edge {
+  background: linear-gradient(
+    to left,
+    hsl(0deg 0% 26%) 0%,
+    hsl(0deg 0% 46%) 8%,
+    hsl(0deg 0% 46%) 92%,
+    hsl(0deg 0% 26%) 100%
+  );
+}
+
+.button-82-pushable.pressed {
+  pointer-events: none;
+  cursor: default;
+}

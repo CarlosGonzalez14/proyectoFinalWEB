@@ -196,10 +196,10 @@ ipcMain.on('update-score', (event, { isCorrect, teamClass }) => {
   };
 
   const teamKey = teamMap[teamClass];
-  const puntaje = currentPuntaje || 0; 
+  const puntaje = currentPuntaje/2 || 0; 
 
   if (teamKey && mainJeopardyWindow) {
-    const delta = isCorrect ? puntaje : -puntaje/2;
+    const delta = isCorrect ? puntaje : -puntaje;
     
     scores[teamKey] += delta;
     console.log('puntaje' + scores[teamKey]);
