@@ -29,6 +29,7 @@ h1, h2, h3 {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  margin-top: 40px;
 }
 
 .button-82-pushable {
