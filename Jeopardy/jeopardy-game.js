@@ -44,15 +44,17 @@ recalculateCardSizes();
 cards.forEach((card, index) => {
   if (index >= 6) {
     card.addEventListener('click', async (event) => {
+      if (card.classList.contains('disabled')) return;
+
       const target = event.target;
-      const puntaje = 200 * Math.floor(index/6);
+      const puntaje = 200 * Math.floor(index / 6);
 
       if (target.classList.contains('front')) {
         ipcRenderer.send('replace-controls-content');
         ipcRenderer.once('content-replaced', () => {
           ipcRenderer.send('card-clicked', puntaje);
         });
-      } 
+      }
 
       if (!card.classList.contains('hover')) {
         card.classList.add('hover');
@@ -65,6 +67,29 @@ cards.forEach((card, index) => {
     });
   }
 });
+
+ipcRenderer.on('finalize-turn', () => {
+  const hoveredCards = document.querySelectorAll('.card-container.hover');
+
+  hoveredCards.forEach((card) => {
+    card.classList.remove('hover');
+    card.classList.add('disabled'); 
+    card.style.left = card.dataset.originalLeft;
+    card.style.top = card.dataset.originalTop;
+    card.style.width = `${rowElement.offsetWidth / 6 - cardSpacing}px`;
+    card.style.height = `${rowElement.offsetHeight / 6 - cardSpacing}px`;
+    card.style.cursor = 'default';
+
+    setTimeout(() => {
+      card.style.zIndex = '';
+    }, 600);
+  });
+
+  ipcRenderer.send('empty-controls-content');
+});
+
+
+
 
 document.addEventListener('DOMContentLoaded', async () => {
   const cardsInner = document.querySelectorAll('.card');

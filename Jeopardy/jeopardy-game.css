@@ -44,9 +44,6 @@ h2{
   position: relative;
   width: 100vw;
   height: 90vh;
-  /* border-style: solid;
-  border-color: greenyellow;
-  border-width: 20px; */
 }
 
 .score-bar{
@@ -55,16 +52,12 @@ h2{
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  /* border-style: solid;
-  border-color: orange;
-  border-width: 2px; */
 }
 
 .score{
   width: 15%;
   height: 100%;
   background-color: black;
-  /* background-color: white; */
   text-align: center;
   align-content: center;
   font-family: 'SevenSegment';
@@ -164,3 +157,10 @@ h2{
   background-color: #f8f8f8;
   transform: rotateY(180deg);
 }
+
+.card-container.disabled .front {
+  background-color: #444; 
+  color: #333; 
+  cursor: default;
+}
+
