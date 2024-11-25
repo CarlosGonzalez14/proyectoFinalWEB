@@ -53,9 +53,6 @@ cards.forEach((card, index) => {
           ipcRenderer.send('card-clicked', puntaje);
         });
       } 
-      else if (target.classList.contains('back')) {
-        ipcRenderer.send('empty-controls-content');
-      }
 
       if (!card.classList.contains('hover')) {
         card.classList.add('hover');
@@ -64,16 +61,6 @@ cards.forEach((card, index) => {
         card.style.width = `${rowElement.offsetWidth}px`;
         card.style.height = `${rowElement.offsetHeight}px`;
         card.style.zIndex = 999;
-      } else {
-        card.classList.remove('hover');
-        card.style.left = card.dataset.originalLeft;
-        card.style.top = card.dataset.originalTop;
-        card.style.width = `${rowElement.offsetWidth / 6 - cardSpacing}px`;
-        card.style.height = `${rowElement.offsetHeight / 6 - cardSpacing}px`;
-
-        setTimeout(() => {
-          card.style.zIndex = '';
-        }, 600);
       }
     });
   }
@@ -106,4 +93,22 @@ ipcRenderer.on('update-team-score', (event, { teamKey, score }) => {
   if (scoreElement) {
     scoreElement.textContent = score.toString(); 
   }
+});
+
+ipcRenderer.on('finalize-turn', () => {
+  const hoveredCards = document.querySelectorAll('.card-container.hover');
+
+  hoveredCards.forEach((card) => {
+    card.classList.remove('hover');
+    card.style.left = card.dataset.originalLeft;
+    card.style.top = card.dataset.originalTop;
+    card.style.width = `${rowElement.offsetWidth / 6 - cardSpacing}px`;
+    card.style.height = `${rowElement.offsetHeight / 6 - cardSpacing}px`;
+
+    setTimeout(() => {
+      card.style.zIndex = '';
+    }, 600);
+  });
+
+  ipcRenderer.send('empty-controls-content');
 });

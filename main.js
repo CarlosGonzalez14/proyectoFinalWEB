@@ -239,3 +239,9 @@ ipcMain.on('empty-controls-content', () => {
     }));
   }
 });
+
+ipcMain.on('finalize-turn', () => {
+  if (mainJeopardyWindow) {
+    mainJeopardyWindow.webContents.send('finalize-turn');
+  }
+});

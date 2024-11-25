@@ -16,6 +16,20 @@
       document.getElementById('puntaje').textContent = puntaje;
     });
   </script>
+  <script type="module">
+    import { setupFinalizeTurnButton } from './jeopardy-controls.js';
+    
+    const { ipcRenderer } = require('electron');
+  
+    // Configurar el botón "Finalizar Turno"
+    const finalizeTurnButton = document.querySelector('.center-button button');
+    const handleFinalizeTurnClick = setupFinalizeTurnButton(ipcRenderer);
+  
+    if (finalizeTurnButton) {
+      finalizeTurnButton.addEventListener('click', handleFinalizeTurnClick);
+    }
+  </script>
+  
 </head>
 <body>
   <div id="puntaje-display">

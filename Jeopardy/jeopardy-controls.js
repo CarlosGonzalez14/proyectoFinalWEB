@@ -18,4 +18,11 @@ export function handleButtonClick(button) {
       });
     }
   }
+
+  export function setupFinalizeTurnButton(ipcRenderer) {
+    return function handleFinalizeTurnClick() {
+      ipcRenderer.send('finalize-turn');
+    };
+  }
+  
   
