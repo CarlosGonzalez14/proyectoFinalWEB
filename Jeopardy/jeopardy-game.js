@@ -44,29 +44,32 @@ recalculateCardSizes();
 cards.forEach((card, index) => {
   if (index >= 6) {
     card.addEventListener('click', async (event) => {
-      if (card.classList.contains('disabled')) return;
+      const frontElement = card.querySelector('.front');
 
-      const target = event.target;
-      const puntaje = 200 * Math.floor(index / 6);
+      // Asegurarse de que el clic se registra en el contenedor .front
+      if (frontElement && (event.target === frontElement || frontElement.contains(event.target))) {
+        if (card.classList.contains('disabled')) return;
 
-      if (target.classList.contains('front')) {
+        const puntaje = 200 * Math.floor(index / 6);
+
         ipcRenderer.send('replace-controls-content');
         ipcRenderer.once('content-replaced', () => {
           ipcRenderer.send('card-clicked', puntaje);
         });
-      }
 
-      if (!card.classList.contains('hover')) {
-        card.classList.add('hover');
-        card.style.left = '0';
-        card.style.top = '0';
-        card.style.width = `${rowElement.offsetWidth}px`;
-        card.style.height = `${rowElement.offsetHeight}px`;
-        card.style.zIndex = 999;
+        if (!card.classList.contains('hover')) {
+          card.classList.add('hover');
+          card.style.left = '0';
+          card.style.top = '0';
+          card.style.width = `${rowElement.offsetWidth}px`;
+          card.style.height = `${rowElement.offsetHeight}px`;
+          card.style.zIndex = 999;
+        }
       }
     });
   }
 });
+
 
 ipcRenderer.on('finalize-turn', () => {
   const hoveredCards = document.querySelectorAll('.card-container.hover');
