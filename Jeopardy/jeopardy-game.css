@@ -152,6 +152,9 @@ h2{
   cursor: pointer;
 }
 
+.front h2{
+  cursor: pointer;
+}
 
 .back {
   background-color: #f8f8f8;
