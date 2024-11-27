@@ -4,6 +4,10 @@ export function handleButtonClick(button) {
   if (parent && parent.classList.contains('select-section')) {
     const siblings = parent.querySelectorAll('.button-82-pushable');
 
+    if (button.classList.contains('correct-answer')) {
+      ipcRenderer.send('finalize-turn'); 
+    }
+
     siblings.forEach((sibling) => {
       const isCorrect = button.classList.contains('correct-answer');
       const teamClass = button.classList.contains('team-blue')
