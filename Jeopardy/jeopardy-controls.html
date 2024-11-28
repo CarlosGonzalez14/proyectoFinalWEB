@@ -16,19 +16,7 @@
       document.getElementById('puntaje').textContent = puntaje;
     });
   </script>
-  <script type="module">
-    import { setupFinalizeTurnButton } from './jeopardy-controls.js';
-    
-    const { ipcRenderer } = require('electron');
-  
-    const finalizeTurnButton = document.querySelector('.center-button button');
-    const handleFinalizeTurnClick = setupFinalizeTurnButton(ipcRenderer);
-  
-    if (finalizeTurnButton) {
-      finalizeTurnButton.addEventListener('click', handleFinalizeTurnClick);
-    }
-  </script>
-  
+  <script type="module" src="jeopardy-controls.js"></script>
 </head>
 <body>
   <div id="puntaje-display">
@@ -80,7 +68,7 @@
     </div>
   </div>
   <div class="center-button">
-      <button class="button-82-pushable" role="button">
+      <button class="button-82-pushable" role="button" onClick="setupFinalizeTurnButton()">
         <span class="button-82-shadow"></span>
         <span class="button-82-edge"></span>
         <span class="button-82-front text">Finalizar Turno</span>

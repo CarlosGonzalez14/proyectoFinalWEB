@@ -44,11 +44,9 @@ function checkAllSectionsDisabled() {
   }
 }
 
+export function setupFinalizeTurnButton() {
+  const { ipcRenderer } = require('electron');
+  ipcRenderer.send('finalize-turn');
+}
 
-  export function setupFinalizeTurnButton(ipcRenderer) {
-    return function handleFinalizeTurnClick() {
-      ipcRenderer.send('finalize-turn');
-    };
-  }
-  
-  
+window.setupFinalizeTurnButton = setupFinalizeTurnButton;
