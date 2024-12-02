@@ -231,3 +231,7 @@ h1 {
 #puntaje-display h2, #respuesta{
   color: var(--mustard);
 }
+
+#result-text{
+  font-size: 5rem;
+}

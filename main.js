@@ -260,11 +260,11 @@ ipcMain.on('finalize-game', () => {
   } else if (teamThree > teamOne && teamThree > teamTwo) {
     resultText = 'El equipo verde gana';
   } else if (teamOne === teamTwo && teamOne > teamThree) {
-    resultText = 'Empate entre los equipos rojo y azul';
+    resultText = 'Empate entre el equipo rojo y el equipo azul';
   } else if (teamOne === teamThree && teamOne > teamTwo) {
-    resultText = 'Empate entre los equipos azul y verde';
+    resultText = 'Empate entre el equipo azul y el equipo verde';
   } else if (teamTwo === teamThree && teamTwo > teamOne) {
-    resultText = 'Empate entre los equipos rojo y verde';
+    resultText = 'Empate entre el equipo rojo y el equipo verde';
   } else {
     resultText = 'Empate entre los tres equipos';
   }
