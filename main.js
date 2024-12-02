@@ -316,3 +316,8 @@ ipcMain.handle('obtener-datos-100-leones', async (event, idPregunta) => {
     throw error;
   }
 });
+
+ipcMain.on('revelar-respuesta', (event, id_respuesta, puntaje) => {
+  console.log("id_respuesta: ", id_respuesta);
+  console.log("puntaje: ", puntaje);
+});

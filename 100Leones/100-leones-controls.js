@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     answerContainer.textContent = respuestas[index].respuesta;
                     scoreContainer.textContent = respuestas[index].puntaje;
 
-                    button.dataset.id = respuestas[index].id_pregunta;
+                    button.dataset.id_respuesta = respuestas[index].id_respuesta;
                     button.dataset.puntaje = respuestas[index].puntaje;
                 }
                 else {
@@ -29,3 +29,10 @@ document.addEventListener('DOMContentLoaded', async () => {
       console.error('Error obteniendo las respuestas desde el renderer:', error);
     }
   });
+
+export function showAnswer(button) {
+   console.log(button.dataset); 
+   ipcRenderer.send('revelar-respuesta', button.dataset.id_respuesta, button.dataset.puntaje);
+}
+
+window.showAnswer = showAnswer;
