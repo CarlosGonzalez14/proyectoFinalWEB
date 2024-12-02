@@ -4,7 +4,7 @@ const BrowserWindow = electron.BrowserWindow;
 const path = require("path");
 const url = require("url");
 const { ipcMain } = require('electron');
-const { obtenerPregunta } = require('./app');
+const { obtenerPregunta, obtenerPregunta100Leones, obtenerRespuestas100Leones } = require('./app');
 
 let mainMenuWindow;
 let mainJeopardyWindow, controlsJeopardyWindow;
@@ -299,4 +299,24 @@ ipcMain.on('restart-game', (event) => {
   scores['team-one']=0;
   scores['team-two']=0;
   scores['team-three']=0;
+});
+
+ipcMain.handle('obtener-pregunta-100-leones', async (event, id_pregunta) => {
+  try {
+    const pregunta = await obtenerPregunta100Leones(id_pregunta);
+    return pregunta;
+  } catch (error) {
+    console.error('Error obteniendo pregunta:', error);
+    throw error;
+  }
+});
+
+ipcMain.handle('obtener-respuestas-100-leones', async (event, id_pregunta) => {
+  try {
+    const respuestas = await obtenerRespuestas100Leones(id_pregunta);
+    return respuestas;
+  } catch (error) {
+    console.error('Error obteniendo pregunta:', error);
+    throw error;
+  }
 });

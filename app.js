@@ -17,4 +17,34 @@ async function obtenerPregunta(categoria, puntaje) {
 
 console.log(PreguntasJeopardy);
 
-module.exports = { obtenerPregunta };
+async function obtenerPregunta100Leones(idPregunta) {
+  try {
+    const pregunta = await Preguntas100Leones.query().findById(idPregunta);
+
+    if (!pregunta) {
+      throw new Error(`No se encontró la pregunta con el ID ${idPregunta}`);
+    }
+
+    return pregunta;
+  } catch (error) {
+    console.error(`Error al obtener la pregunta: ${error.message}`);
+    throw error;
+  }
+}
+
+async function obtenerRespuestas100Leones(idPregunta) {
+  try {
+    const respuestas = await Respuestas100Leones.query().where('id_pregunta', idPregunta);
+
+    if (!respuestas || respuestas.length === 0) {
+      throw new Error(`No se encontraron respuestas para la pregunta con el ID ${idPregunta}`);
+    }
+
+    return respuestas;
+  } catch (error) {
+    console.error(`Error al obtener las respuestas: ${error.message}`);
+    throw error;
+  }
+}
+
+module.exports = { obtenerPregunta , obtenerPregunta100Leones, obtenerRespuestas100Leones };
