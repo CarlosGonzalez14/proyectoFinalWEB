@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultados Jeopardy</title>
+  <link rel="stylesheet" href="jeopardy-results.css">
+  <script>
+    const { ipcRenderer } = require('electron');
+  
+    ipcRenderer.on('update-results', (event, resultText) => {
+      document.getElementById('result-text').textContent = resultText;
+    });
+  </script>
+</head>
+<body>
+  <div class="results-container">
+    <h1 id="result-text">Resultados</h1>
+    <div class="center-button">
+      <button class="button-82-pushable" role="button" onclick="setupRestartGameButton()">
+        <span class="button-82-shadow"></span>
+        <span class="button-82-edge"></span>
+        <span class="button-82-front text">
+          Reiniciar Juego
+        </span>
+      </button>
+    </div>
+  </div>
+  <script type="module" src="jeopardy-controls.js"></script>
+</body>
+</html>

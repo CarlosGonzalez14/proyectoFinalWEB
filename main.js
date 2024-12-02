@@ -245,3 +245,58 @@ ipcMain.on('finalize-turn', () => {
     mainJeopardyWindow.webContents.send('finalize-turn');
   }
 });
+
+ipcMain.on('finalize-game', () => {
+  const [teamOne, teamTwo, teamThree] = [scores['team-one'], scores['team-two'], scores['team-three']];
+  let resultText = '';
+  console.log("Puntaje Equipo Azul: " + teamOne);
+  console.log("Puntaje Equipo Rojo: " + teamTwo);
+  console.log("Puntaje Equipo Verde: " + teamThree);
+  
+  if (teamOne > teamTwo && teamOne > teamThree) {
+    resultText = 'El equipo azul gana';
+  } else if (teamTwo > teamOne && teamTwo > teamThree) {
+    resultText = 'El equipo rojo gana';
+  } else if (teamThree > teamOne && teamThree > teamTwo) {
+    resultText = 'El equipo verde gana';
+  } else if (teamOne === teamTwo && teamOne > teamThree) {
+    resultText = 'Empate entre los equipos rojo y azul';
+  } else if (teamOne === teamThree && teamOne > teamTwo) {
+    resultText = 'Empate entre los equipos azul y verde';
+  } else if (teamTwo === teamThree && teamTwo > teamOne) {
+    resultText = 'Empate entre los equipos rojo y verde';
+  } else {
+    resultText = 'Empate entre los tres equipos';
+  }
+  
+  ipcMain.emit('show-results', null, resultText);
+});
+
+ipcMain.on('show-results', (event, resultText) => {
+  if (mainJeopardyWindow) {
+    const resultsPath = path.join(__dirname, '/jeopardy/jeopardy-results.html');
+    mainJeopardyWindow.loadURL(url.format({
+      pathname: resultsPath,
+      protocol: 'file',
+      slashes: true,
+    }));
+
+    mainJeopardyWindow.webContents.once('did-finish-load', () => {
+      mainJeopardyWindow.webContents.send('update-results', resultText);
+    });
+  }
+});
+
+ipcMain.on('restart-game', (event) => {
+  if (mainJeopardyWindow) {
+    const resultsPath = path.join(__dirname, '/jeopardy/jeopardy-game.html');
+    mainJeopardyWindow.loadURL(url.format({
+      pathname: resultsPath,
+      protocol: 'file',
+      slashes: true,
+    }));
+  }
+  scores['team-one']=0;
+  scores['team-two']=0;
+  scores['team-three']=0;
+});

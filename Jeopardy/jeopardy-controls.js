@@ -50,3 +50,17 @@ export function setupFinalizeTurnButton() {
 }
 
 window.setupFinalizeTurnButton = setupFinalizeTurnButton;
+
+export function setupFinalizeGameButton() {
+  const { ipcRenderer } = require('electron');
+  ipcRenderer.send('finalize-game');
+}
+
+window.setupFinalizeGameButton = setupFinalizeGameButton;
+
+export function setupRestartGameButton() {
+  const { ipcRenderer } = require('electron');
+  ipcRenderer.send('restart-game');
+}
+
+window.setupRestartGameButton = setupRestartGameButton;

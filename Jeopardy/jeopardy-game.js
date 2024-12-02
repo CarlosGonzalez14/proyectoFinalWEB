@@ -46,7 +46,6 @@ cards.forEach((card, index) => {
     card.addEventListener('click', async (event) => {
       const frontElement = card.querySelector('.front');
 
-      // Asegurarse de que el clic se registra en el contenedor .front
       if (frontElement && (event.target === frontElement || frontElement.contains(event.target))) {
         if (card.classList.contains('disabled')) return;
 
@@ -71,21 +70,24 @@ cards.forEach((card, index) => {
 });
 
 
+var playedCards = 0;
+
 ipcRenderer.on('finalize-turn', () => {
   const hoveredCards = document.querySelectorAll('.card-container.hover');
+  const allCards = document.querySelectorAll('.card-container');
 
   hoveredCards.forEach((cardContainer) => {
     const card = cardContainer.querySelector('.card');
-    console.log(card);
-    
     const backContent = card.querySelector('.back h2');
-    
     const respuesta = card.dataset.respuesta;
 
     if (respuesta) {
       backContent.textContent = "Respuesta: " + respuesta;
     }
 
+    ++playedCards;
+    console.log(playedCards);
+    
     setTimeout(() => {
       cardContainer.classList.remove('hover');
       cardContainer.classList.add('disabled');
@@ -96,12 +98,20 @@ ipcRenderer.on('finalize-turn', () => {
 
       setTimeout(() => {
         cardContainer.style.zIndex = '';
-      }, 600); 
-    }, 2000); 
+
+        setTimeout(() => {
+          if (playedCards == 30) {
+            ipcRenderer.send('finalize-game');
+          }
+        }, 600);
+      }, 600);
+    }, 2000);
   });
 
   ipcRenderer.send('empty-controls-content');
+
 });
+
 
 
 document.addEventListener('DOMContentLoaded', async () => {
