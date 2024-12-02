@@ -80,11 +80,15 @@ ipcRenderer.on('finalize-turn', () => {
 
   hoveredCards.forEach((cardContainer) => {
     const card = cardContainer.querySelector('.card');
+    const back = card.querySelector('.back');
     const backContent = card.querySelector('.back h2');
     const respuesta = card.dataset.respuesta;
 
     if (respuesta) {
       backContent.textContent = "Respuesta: " + respuesta;
+      console.log(back);
+      console.log(back.classList);
+      back.classList.add('answer');
     }
 
     ++playedCards;

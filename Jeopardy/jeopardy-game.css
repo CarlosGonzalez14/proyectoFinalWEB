@@ -188,11 +188,14 @@ h2{
   font-size: 3.5rem;
 }
 
+.answer h2{
+  color: var(--mustard) !important;
+}
+
 .back h2{
   font-size: 4rem;
   font-family: 'Preguntas';
 }
-
 
 .card-container.disabled .front{
   background-color: #444; 
