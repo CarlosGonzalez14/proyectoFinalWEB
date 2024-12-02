@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       const { respuestas } = await ipcRenderer.invoke('obtener-datos-100-leones', idPregunta);
   
       if(respuestas){
+            console.log(respuestas);
             sectionContainers.forEach((sectionContainer, index) => {
                 if(respuestas[index]) {
                     const answerContainer = sectionContainer.querySelector('.answer-container');
@@ -21,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     button.dataset.puntaje = respuestas[index].puntaje;
                 }
                 else {
-                    sectionContainer.classList.add('invisible');
+                    sectionContainer.classList.add('intangible');
                 }
             });
         }

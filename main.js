@@ -320,4 +320,7 @@ ipcMain.handle('obtener-datos-100-leones', async (event, idPregunta) => {
 ipcMain.on('revelar-respuesta', (event, id_respuesta, puntaje) => {
   console.log("id_respuesta: ", id_respuesta);
   console.log("puntaje: ", puntaje);
+  if(main100LeonesWindow){
+    main100LeonesWindow.webContents.send('visibilizar-respuesta', id_respuesta);
+  }
 });

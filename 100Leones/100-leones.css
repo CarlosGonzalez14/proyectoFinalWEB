@@ -19,6 +19,10 @@ body, html {
     overflow: hidden;
 }
 
+.overflow-body{
+    overflow: scroll;
+}
+
 @font-face {
     font-family: 'SevenSegment';
     src: url('../fonts/SevenSegment.ttf') format('truetype'); 
@@ -157,8 +161,17 @@ body, html {
     visibility: hidden;
 }
 
-.visible{
+.visible {
     visibility: visible;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.intangible {
+    visibility: hidden;
+    display: none;
 }
 
 .answer-text-box{

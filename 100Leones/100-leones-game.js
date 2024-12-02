@@ -18,10 +18,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             if(respuestas[index]) {
                 const answerTextBox = answerBox.querySelector('.answer-text');
                 const answerPointsBox = answerBox.querySelector('.answer-points');
+                const answerHidden = answerBox.querySelector('.answer-hidden');
     
                 answerTextBox.textContent = respuestas[index].respuesta;
                 answerPointsBox.textContent = respuestas[index].puntaje;
-
+                answerHidden.id = "answer-hidden-" + respuestas[index].id_respuesta;
             }
             else {
                 answerBox.classList.add('invisible');
@@ -31,4 +32,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (error) {
     console.error('Error obteniendo los datos desde el renderer:', error);
   }
+});
+
+ipcRenderer.on('visibilizar-respuesta', (event, id_respuesta) => {
+    const answerHidden = document.querySelector('#answer-hidden-'+id_respuesta);
+    answerHidden.classList.add('visible');
 });
