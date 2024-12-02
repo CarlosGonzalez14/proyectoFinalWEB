@@ -5,11 +5,35 @@
   --red-exit: hsl(345deg 100% 47%);
   --gray-light: #d3d3d3;
   --gray-dark: #a9a9a9;
+  --mustard: #E79E49;
+}
+
+@font-face {
+  font-family: 'Tablero';
+  src: url('../fonts/Swiss 911 Compressed Regular.otf') format('truetype'); 
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Preguntas';
+  src: url('../fonts/KorinnaStd-Bold.ttf') format('truetype'); 
+  font-weight: normal;
+  font-style: normal;
 }
 
 body, h1, h2, h3, p, span {
   cursor: default;
   user-select: none;
+  color: white; 
+  font-family: 'Preguntas';
+  text-shadow: 
+  2px 2px 0px #000, 
+  2px -2px 0px transparent, 
+  -2px 2px 0px transparent, 
+  2px 2px 0px #000; 
+  text-transform: uppercase;
+  text-align: center;
 }
 
 h1, h2, h3 {
@@ -82,7 +106,7 @@ h1, h2, h3 {
   border-radius: 12px;
   font-size: 1.1rem;
   color: white;
-  font-weight: bold;
+  text-shadow: unset;
   background: var(--red-exit);
   will-change: transform;
   transform: translateY(-4px);
@@ -169,4 +193,41 @@ h1, h2, h3 {
 .button-82-pushable.pressed {
   pointer-events: none;
   cursor: default;
+}
+
+ html {
+  background: radial-gradient(circle, #0047FF, #020E7D);
+  color: white;
+}
+
+.results-body{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Arial', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.results-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+.center-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#puntaje-display h2, #respuesta{
+  color: var(--mustard);
 }

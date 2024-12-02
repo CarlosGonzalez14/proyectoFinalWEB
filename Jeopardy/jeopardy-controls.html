@@ -12,7 +12,8 @@
   <script>
     const { ipcRenderer } = require('electron');
     
-    ipcRenderer.on('update-puntaje', (event, puntaje) => {
+    ipcRenderer.on('update-puntaje', (event, puntaje, respuesta) => {
+      document.getElementById('respuesta').textContent = respuesta;
       document.getElementById('puntaje').textContent = puntaje;
     });
   </script>
@@ -20,7 +21,8 @@
 </head>
 <body>
   <div id="puntaje-display">
-    <h1>Puntaje: <span id="puntaje">0</span></h1>
+    <h2>Respuesta: <span id="respuesta">res</span></h2>
+    <h3>Puntaje: <span id="puntaje">0</span></h3>
   </div>
   <div class="team-section">
     <h2>Equipo Azul</h2>

@@ -208,10 +208,10 @@ ipcMain.on('update-score', (event, { isCorrect, teamClass }) => {
   }
 });
 
-ipcMain.on('card-clicked', (event, puntaje) => {
+ipcMain.on('card-clicked', (event, puntaje, respuesta) => {
   currentPuntaje = puntaje || 0;
   if (controlsJeopardyWindow) {
-    controlsJeopardyWindow.webContents.send('update-puntaje', puntaje);
+    controlsJeopardyWindow.webContents.send('update-puntaje', puntaje, respuesta);
   }
 });
 

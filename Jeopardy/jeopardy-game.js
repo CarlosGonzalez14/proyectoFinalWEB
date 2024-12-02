@@ -45,15 +45,17 @@ cards.forEach((card, index) => {
   if (index >= 6) {
     card.addEventListener('click', async (event) => {
       const frontElement = card.querySelector('.front');
+      const realCard = card.querySelector('.card');
 
       if (frontElement && (event.target === frontElement || frontElement.contains(event.target))) {
         if (card.classList.contains('disabled')) return;
 
         const puntaje = 200 * Math.floor(index / 6);
+        const respuesta = realCard.dataset.respuesta;
 
         ipcRenderer.send('replace-controls-content');
         ipcRenderer.once('content-replaced', () => {
-          ipcRenderer.send('card-clicked', puntaje);
+          ipcRenderer.send('card-clicked', puntaje, respuesta);
         });
 
         if (!card.classList.contains('hover')) {
