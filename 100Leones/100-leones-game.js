@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     
                 answerTextBox.textContent = respuestas[index].respuesta;
                 answerPointsBox.textContent = respuestas[index].puntaje;
+
             }
             else {
                 answerBox.classList.add('invisible');

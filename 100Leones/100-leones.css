@@ -145,6 +145,18 @@ body, html {
     overflow: hidden;
 }
 
+.answer-hidden {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    visibility: hidden;
+}
+
+.visible{
+    visibility: visible;
+}
+
 .answer-text-box{
     height: 100%;
     width: 100%;
@@ -176,7 +188,3 @@ body, html {
     margin-top: 2vh;
 }
   
-.invisible {
-    visibility: hidden;
-}
-

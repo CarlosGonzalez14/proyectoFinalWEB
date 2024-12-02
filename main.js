@@ -310,8 +310,6 @@ ipcMain.handle('obtener-datos-100-leones', async (event, idPregunta) => {
       throw new Error(`No se encontraron datos para la pregunta con el ID ${idPregunta}`);
     }
 
-    console.log('Pregunta obtenida:', pregunta);
-    console.log('Respuestas obtenidas:', respuestas);
     return { pregunta, respuestas };
   } catch (error) {
     console.error(`Error obteniendo datos: ${error.message}`);
