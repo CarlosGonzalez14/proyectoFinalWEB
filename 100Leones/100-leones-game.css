@@ -1,0 +1,173 @@
+:root{
+    --main-yellow: #E79E49;
+    --secondary-yellow: #FFAE51;
+    --main-green: lime;
+    --secondary-green: #1FE11F;
+    --main-red: red;
+    --secondary-red: #E11F1F;
+    --border-color: lightgray;
+  }
+
+body, html {
+    background: #1F1F1F;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+@font-face {
+    font-family: 'SevenSegment';
+    src: url('../fonts/SevenSegment.ttf') format('truetype'); 
+    font-weight: normal;
+    font-style: normal;
+}
+
+@media (max-width: 2928px) { .scoreboard {font-size: 5em;} }
+@media (max-width: 2496px) { .scoreboard {font-size: 4.5em;} }
+@media (max-width: 2064px) { .scoreboard {font-size: 4em;} }
+@media (max-width: 1632px) { .scoreboard {font-size: 3.5em;} }
+@media (max-width: 1200px) { .scoreboard {font-size: 3em;} }
+@media (max-width: 768px) { .scoreboard {font-size: 2.5em;} }
+@media (max-width: 336px) { .scoreboard {font-size: 2em;} }
+
+.score-section{
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    background-color: blue;
+}
+
+.scoreboard{
+    height: 10vh;
+    width: 15vw;
+    background-color: black;
+    text-align: center;
+    align-content: center;
+    font-family: 'SevenSegment';
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+}
+
+.main-score {
+    color: var(--main-yellow);
+    text-shadow: 0 0 15px var(--secondary-yellow);
+}
+
+.score-bar{
+    width: auto;
+    padding: 0 10px;
+    padding-bottom: 60vh;
+    background-color: red;
+    align-content: center;
+}
+
+.green-score {
+    color: var(--main-green);
+    text-shadow: 0 0 15px var(--secondary-green);
+}
+
+.red-score {
+    color: var(--main-red);
+    text-shadow: 0 0 15px var(--secondary-red);
+}
+
+.main-section{
+    height: 85vh;
+    width: 100%;
+    background-color: blueviolet;
+    display: flex;
+}
+
+.game-section{
+    width: 100%;
+    background-color: lime;
+    align-content: center;
+}
+
+.gameboard{
+    width: 100%;
+    height: 100%;
+    background-color: orange;
+    border: 8px solid var(--border-color);
+    border-radius: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    align-items: center;
+}
+
+.question-section {
+    width: 100%;
+    height: 30%;
+    background-color: cyan;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.question-text {
+    padding: 0 20px;
+    font-size: 1.5rem; 
+    line-height: 1.5; 
+}
+
+.answers-section{
+    width: 100%;
+    height: 70%;
+    background-color: blueviolet;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 45% 45%;
+    grid-template-rows: 23% 23% 23% 23%;
+    gap: 10px;
+    padding: 10px 15px;
+    justify-content: center;
+}
+
+.answer-box{
+    background-color: yellow;
+    width: 100%;
+    height: 100%;
+    border: 5px solid var(--border-color);
+    border-radius: 10px;
+    box-sizing: border-box;
+    display: flex;
+    overflow: hidden;
+}
+
+.answer-text-box{
+    height: 100%;
+    width: 100%;
+    background-color: palevioletred;
+    color: white;
+    display: flex; 
+    align-items: center; 
+    justify-content: start; 
+    padding-left: 10px; 
+    font-size: 1.2rem; 
+}
+
+.answer-points-box{
+    height: 100%;
+    aspect-ratio: 1/1;
+    background-color: midnightblue;
+    justify-items: center;
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    color: white; 
+    font-size: 1.5rem; 
+}
+
+.main-section {
+    position: relative;
+    width: 100vw;
+    height: 88vh;
+    margin-top: 2vh;
+}
+  
+
