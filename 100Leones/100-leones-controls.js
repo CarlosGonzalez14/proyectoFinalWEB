@@ -2,8 +2,6 @@ const { ipcRenderer } = require('electron');
 
 document.addEventListener('DOMContentLoaded', async () => {
     const sectionContainers = document.querySelectorAll('.section-container');
-    // const answerContainers = document.querySelectorAll('.answer-container');
-    // const scoreContainers = document.querySelectorAll('.score-container');
     
     try {
       const idPregunta = 5; 
