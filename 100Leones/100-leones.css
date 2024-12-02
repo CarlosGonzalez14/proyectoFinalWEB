@@ -9,7 +9,7 @@
   }
 
 body, html {
-    background: #1F1F1F;
+    /* background: #1F1F1F; */
     height: 100%;
     margin: 0;
     overflow: hidden;
@@ -176,4 +176,7 @@ body, html {
     margin-top: 2vh;
 }
   
+.invisible {
+    visibility: hidden;
+}
 

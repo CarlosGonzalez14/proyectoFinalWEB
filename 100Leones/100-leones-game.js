@@ -1,3 +1,4 @@
+const { count } = require('console');
 const { ipcRenderer } = require('electron');
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -12,17 +13,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (pregunta) {
       questionText.textContent = pregunta.pregunta; 
     }
-
-    if (respuestas) {
-      respuestas.forEach((respuesta, index) => {
-        if (answerBoxes[index]) {
-          const answerTextBox = answerBoxes[index].querySelector('.answer-text');
-          const answerPointsBox = answerBoxes[index].querySelector('.answer-points');
-
-          if (answerTextBox) answerTextBox.textContent = respuesta.respuesta; 
-          if (answerPointsBox) answerPointsBox.textContent = respuesta.puntaje; 
-        }
-      });
+    if(respuestas){
+        answerBoxes.forEach((answerBox, index) => {
+            if(respuestas[index]) {
+                const answerTextBox = answerBox.querySelector('.answer-text');
+                const answerPointsBox = answerBox.querySelector('.answer-points');
+    
+                answerTextBox.textContent = respuestas[index].respuesta;
+                answerPointsBox.textContent = respuestas[index].puntaje;
+            }
+            else {
+                answerBox.classList.add('invisible');
+            }
+        });
     }
   } catch (error) {
     console.error('Error obteniendo los datos desde el renderer:', error);
