@@ -2,6 +2,10 @@ const { Model } = require('objection');
 const Knex = require('knex');
 const knexConfig = require('./knexfile');
 const PreguntasJeopardy = require('./models/PreguntasJeopardy');
+const Preguntas100Leones = require('./models/Preguntas100Leones');
+const Respuestas100Leones = require('./models/Respuestas100Leones');
+
+
 
 const knex = Knex(knexConfig.development);
 Model.knex(knex);
