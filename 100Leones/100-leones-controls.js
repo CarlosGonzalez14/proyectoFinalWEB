@@ -12,9 +12,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if(respuestas[index]) {
                     const answerContainer = sectionContainer.querySelector('.answer-container');
                     const scoreContainer = sectionContainer.querySelector('.score-container');
+                    const button = sectionContainer.querySelector('.button-pushable');
         
                     answerContainer.textContent = respuestas[index].respuesta;
                     scoreContainer.textContent = respuestas[index].puntaje;
+
+                    button.dataset.id = respuestas[index].id_pregunta;
+                    button.dataset.puntaje = respuestas[index].puntaje;
                 }
                 else {
                     sectionContainer.classList.add('invisible');
