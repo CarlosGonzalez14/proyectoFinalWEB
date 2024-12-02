@@ -301,22 +301,20 @@ ipcMain.on('restart-game', (event) => {
   scores['team-three']=0;
 });
 
-ipcMain.handle('obtener-pregunta-100-leones', async (event, id_pregunta) => {
+ipcMain.handle('obtener-datos-100-leones', async (event, idPregunta) => {
   try {
-    const pregunta = await obtenerPregunta100Leones(id_pregunta);
-    return pregunta;
-  } catch (error) {
-    console.error('Error obteniendo pregunta:', error);
-    throw error;
-  }
-});
+    const pregunta = await obtenerPregunta100Leones(idPregunta);
+    const respuestas = await obtenerRespuestas100Leones(idPregunta);
 
-ipcMain.handle('obtener-respuestas-100-leones', async (event, id_pregunta) => {
-  try {
-    const respuestas = await obtenerRespuestas100Leones(id_pregunta);
-    return respuestas;
+    if (!pregunta || !respuestas || respuestas.length === 0) {
+      throw new Error(`No se encontraron datos para la pregunta con el ID ${idPregunta}`);
+    }
+
+    console.log('Pregunta obtenida:', pregunta);
+    console.log('Respuestas obtenidas:', respuestas);
+    return { pregunta, respuestas };
   } catch (error) {
-    console.error('Error obteniendo pregunta:', error);
+    console.error(`Error obteniendo datos: ${error.message}`);
     throw error;
   }
 });
