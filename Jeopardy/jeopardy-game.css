@@ -194,9 +194,14 @@ h2{
 }
 
 
-.card-container.disabled .front {
+.card-container.disabled .front{
   background-color: #444; 
   color: #333; 
   cursor: default;
+}
+
+.card-container.disabled .front h2{
+  cursor: default;
+  visibility: hidden;
 }
 
