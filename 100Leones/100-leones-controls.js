@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   await reiniciarControles();
 });
 
+const textoAnuncios = ["Primera Ronda", "Segunda Ronda", "Tercera Ronda", "Fin del Juego"];
+var idx = 0;
+
 async function reiniciarControles() {
   const sectionContainers = document.querySelectorAll('.section-container');
     
@@ -24,7 +27,7 @@ async function reiniciarControles() {
                   answerContainer.textContent = respuestas[index].respuesta;
                   scoreContainer.textContent = respuestas[index].puntaje;
 
-                  // button.classList.remove('pressed');
+                  button.classList.remove('pressed');
                   button.removeAttribute('disabled');
                   
                   button.dataset.id_button = index;
@@ -38,6 +41,8 @@ async function reiniciarControles() {
           });
       }
       ++idPregunta;
+      showMessage(textoAnuncios[idx]);
+      ++idx;
   } catch (error) {
     console.error('Error obteniendo las respuestas desde el renderer:', error);
   }
@@ -74,3 +79,35 @@ export function endMatch(){
 }
 
 window.endMatch = endMatch;
+
+export function showError(button, src){
+  if(src != '../assets/cross.png')
+    button.classList.add('pressed');
+  ipcRenderer.send('mostrar-error',src);
+}
+
+window.showError = showError;
+
+export function showAnnouncement(button, msg){
+  button.classList.add('pressed');
+  ipcRenderer.send('mostrar-anuncio',msg);
+}
+
+window.showAnnouncement = showAnnouncement;
+
+function showMessage(msg){
+  ipcRenderer.send('mostrar-anuncio',msg);
+}
+
+export function givePoints(team){
+  // const buttons = document.querySelectorAll('.points-button')
+
+  // buttons.forEach((button) => {
+  //   button.classList.add('pressed');
+  // });
+  ipcRenderer.send('otorgar-puntos',team);
+  reiniciarControles();
+  ipcRenderer.send('terminar-partida');
+}
+
+window.givePoints = givePoints;

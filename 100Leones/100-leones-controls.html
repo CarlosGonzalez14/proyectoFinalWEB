@@ -7,6 +7,46 @@
     <link rel="stylesheet" href="100-leones.css">
 </head>
 <body class="overflow-body">
+    <div class="session-container">
+        <h2 class="answer-header">Otorgar Puntos</span></h2>
+        <div class="center-session-button">
+            <button class="button-pushable green-button points-button" role="button" onclick="givePoints('green-team')">
+              <span class="button-shadow"></span>
+              <span class="button-edge"></span>
+              <span class="button-front text">Equipo Verde</span>
+            </button>
+            <button class="button-pushable red-button points-button" role="button" onclick="givePoints('red-team')">
+              <span class="button-shadow"></span>
+              <span class="button-edge"></span>
+              <span class="button-front text">Equipo Rojo</span>
+            </button>
+        </div>
+    </div>
+    <div class="error-container">
+        <h2 class="error-header">Mostrar error</span></h2>
+        <div class="center-error-button">
+            <button class="button-pushable red-button" role="button" onclick="showError(this,'../assets/cross.png')">
+              <span class="button-shadow"></span>
+              <span class="button-edge"></span>
+              <span class="button-front text">Respuesta incorrecta</span>
+            </button>
+            <button class="button-pushable red-button" role="button" onclick="showError(this,'../assets/x.png')">
+              <span class="button-shadow"></span>
+              <span class="button-edge"></span>
+              <span class="button-front text">Primer Strike</span>
+            </button>
+            <button class="button-pushable red-button" role="button" onclick="showError(this,'../assets/x2.png')">
+              <span class="button-shadow"></span>
+              <span class="button-edge"></span>
+              <span class="button-front text">Segundo Strike</span>
+            </button>
+            <button class="button-pushable red-button" role="button" onclick="showError(this,'../assets/x3.png')">
+              <span class="button-shadow"></span>
+              <span class="button-edge"></span>
+              <span class="button-front text">Tercer Strike</span>
+            </button>
+        </div>
+    </div>
     <div class="section-container">
         <h2 class="answer-header">Respuesta: <span class="answer-container">res</span></h2>
         <h3 class="points-header">Puntaje: <span class="score-container">80</span></h3>

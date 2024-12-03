@@ -58,6 +58,50 @@ ipcRenderer.on('visibilizar-respuesta', (event, id_respuesta, puntaje) => {
     mainScoreboard.textContent = main_score.toString();
 });
 
+ipcRenderer.on('dar-puntos', (event, team) => {
+    const mainScoreboard = document.querySelector('.main-score');
+    const greenScoreboard = document.querySelector('.green-score');
+    const redScoreboard = document.querySelector('.red-score');
+
+    if(team === 'green-team'){
+      green_score = parseInt(green_score) + parseInt(main_score);
+      greenScoreboard.textContent = green_score.toString();
+    }
+    else
+    {
+      red_score = parseInt(red_score) + parseInt(main_score);
+      redScoreboard.textContent = red_score.toString();
+    }
+    main_score= parseInt(0);
+    mainScoreboard.textContent = main_score.toString();
+});
+
+ipcRenderer.on('visibilizar-error', (event, src) => {
+    const errorSpan = document.querySelector('#error-span');
+    const errorImg = document.querySelector('#error-img');
+
+    errorSpan.classList.remove('invisible');
+    errorImg.src=src;
+    setTimeout(() => {
+      errorSpan.classList.add('invisible');
+    }, 2000);
+});
+
+ipcRenderer.on('visibilizar-anuncio', (event, msg) => {
+  console.log("MSG")
+    const anuncioSpan = document.querySelector('#announcement-span');
+    const anuncioMsg = document.querySelector('#announcement-text');
+
+    anuncioSpan.classList.remove('invisible');
+    console.log(anuncioMsg.textContent);
+    console.log(msg);
+    anuncioMsg.textContent=msg;
+    console.log(anuncioMsg);
+    setTimeout(() => {
+      anuncioSpan.classList.add('invisible');
+    }, 4000);
+});
+
 ipcRenderer.on('terminar-partida', async () => {
   const mainScoreboard = document.querySelector('.main-score');
 

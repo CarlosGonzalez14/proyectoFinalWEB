@@ -328,3 +328,23 @@ ipcMain.on('terminar-partida', (event) => {
     main100LeonesWindow.webContents.send('terminar-partida');
   }
 });
+
+ipcMain.on('mostrar-error', (event, src) => {
+  if(main100LeonesWindow){
+    main100LeonesWindow.webContents.send('visibilizar-error',src);
+  }
+});
+
+ipcMain.on('mostrar-anuncio', (event, msg) => {
+  console.log("Menaje")
+  if(main100LeonesWindow){
+    main100LeonesWindow.webContents.send('visibilizar-anuncio',msg);
+  }
+});
+
+ipcMain.on('otorgar-puntos', (event, team) => {
+  console.log(team)
+  if(main100LeonesWindow){
+    main100LeonesWindow.webContents.send('dar-puntos',team);
+  }
+});
