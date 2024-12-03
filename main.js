@@ -322,3 +322,9 @@ ipcMain.on('revelar-respuesta', (event, id_respuesta, puntaje) => {
     main100LeonesWindow.webContents.send('visibilizar-respuesta', id_respuesta, puntaje);
   }
 });
+
+ipcMain.on('terminar-partida', (event) => {
+  if(main100LeonesWindow){
+    main100LeonesWindow.webContents.send('terminar-partida');
+  }
+});

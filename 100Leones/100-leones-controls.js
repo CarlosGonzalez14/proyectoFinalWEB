@@ -38,3 +38,9 @@ export function showAnswer(button) {
 }
 
 window.showAnswer = showAnswer;
+
+export function endMatch(){
+  ipcRenderer.send('terminar-partida');
+}
+
+window.endMatch = endMatch;

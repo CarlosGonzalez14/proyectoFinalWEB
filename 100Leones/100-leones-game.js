@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   await cargarDatosPregunta(idPregunta);
 });
 
-
 async function cargarDatosPregunta(idPregunta) {
   const questionText = document.querySelector('#question');
   const answerBoxes = document.querySelectorAll('.answer-box');
@@ -22,13 +21,16 @@ async function cargarDatosPregunta(idPregunta) {
 
     if (respuestas) {
       answerBoxes.forEach((answerBox, index) => {
+        const answerHidden = answerBox.querySelector('.answer-hidden');
+        answerHidden.classList.remove('visible');
+        
         if (respuestas[index]) {
           const answerTextBox = answerBox.querySelector('.answer-text');
           const answerPointsBox = answerBox.querySelector('.answer-points');
-          const answerHidden = answerBox.querySelector('.answer-hidden');
 
           answerTextBox.textContent = respuestas[index].respuesta;
           answerPointsBox.textContent = respuestas[index].puntaje;
+          answerHidden.classList.remove('visible');
           answerHidden.id = "answer-hidden-" + respuestas[index].id_respuesta;
         } else {
           answerBox.classList.add('invisible');
@@ -50,4 +52,13 @@ ipcRenderer.on('visibilizar-respuesta', (event, id_respuesta, puntaje) => {
     
     main_score= parseInt(main_score) + parseInt(puntaje);
     mainScoreboard.textContent = main_score.toString();
+});
+
+ipcRenderer.on('terminar-partida', async () => {
+  const mainScoreboard = document.querySelector('.main-score');
+  main_score= 0;
+  mainScoreboard.textContent = main_score.toString();
+
+  const idPregunta = 5;
+  await cargarDatosPregunta(idPregunta);
 });
