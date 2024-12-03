@@ -32,6 +32,20 @@ body, html {
     font-style: normal;
 }
 
+@font-face {
+  font-family: 'Tablero';
+  src: url('../fonts/Swiss 911 Compressed Regular.otf') format('truetype'); 
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Preguntas';
+  src: url('../fonts/KorinnaStd-Bold.ttf') format('truetype'); 
+  font-weight: normal;
+  font-style: normal;
+}
+
 @media (max-width: 2928px) { .scoreboard {font-size: 5em;} }
 @media (max-width: 2496px) { .scoreboard {font-size: 4.5em;} }
 @media (max-width: 2064px) { .scoreboard {font-size: 4em;} }
@@ -356,6 +370,180 @@ body, html {
     cursor: default;
   }
 
-  .error-button {
-    margin: 10px;
+  #announcement-text{
+    z-index: 100;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+ }
+
+ #error-span{
+  z-index: 200;
+  position: absolute;
+  transform: translate(-50%,-50%);
+  top: 50%;
+  left: 50%;
+  height: 30%;
+ }
+
+ img{
+  height: 100%;
+  width: 100%;
+}
+
+ .gold-text {
+  font-family: 'Tablero';
+  font-size: 10rem;
+  letter-spacing: 2px;
+  word-spacing: 0.2em;
+  display: inline-block;
+  padding: 0;
+  line-height: 1;
+  white-space: nowrap;
+  color: transparent;
+  background-color: #E8A95B; /* Gold base color */
+  background-image: radial-gradient(
+    ellipse farthest-corner at right bottom,
+    white 0%,
+    #F0BB7A 20%,
+    #E8A95B 60%,
+    transparent 80%
+  ), radial-gradient(
+    ellipse farthest-corner at left top,
+    white 0%,
+    #F0BB7A 50%,
+    #DE9945 75%,
+    #E8A95B 100%
+  );
+  background-size: 100% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  margin: 0 0 0.5rem 0;
+  position: relative;
+}
+
+.gold-text:before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #E8A95B; /* Gold shadow color */
+  z-index: -1;
+  text-shadow:
+    0 -1px 0 rgba(255, 255, 255, 0.75),
+    0 1px 0 rgba(0, 0, 0, 0.75),
+    0 2px 0 rgba(0, 0, 0, 0.7),
+    0 3px 0 rgba(0, 0, 0, 0.65),
+    0 4px 0 rgba(0, 0, 0, 0.55),
+    0 4px 2px rgba(0, 0, 0, 0.55),
+    0 0.075em 0.1em rgba(0, 0, 0, 0.3),
+    0 0.15em 0.3em rgba(0, 0, 0, 0.2);
+}
+
+.gold-text__highlight {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+
+.gold-text__highlight:after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  background-image: linear-gradient(
+    100deg,
+    transparent 0%,
+    transparent 6rem,
+    white 11rem,
+    transparent 11.15rem,
+    transparent 15rem,
+    rgba(255, 255, 255, 0.3) 20rem,
+    transparent 25rem,
+    transparent 27rem,
+    rgba(255, 255, 255, 0.6) 32rem,
+    white 33rem,
+    rgba(255, 255, 255, 0.3) 33.15rem,
+    transparent 38rem,
+    transparent 40rem,
+    rgba(255, 255, 255, 0.3) 45rem,
+    transparent 50rem,
+    transparent 100%
+  );
+  background-clip: text;
+  background-size: 60rem 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  animation-name: shine;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-duration: 4s;
+  animation-fill-mode: both;
+  animation-timing-function: linear;
+}
+
+.gold-text__highlight:before {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  color: transparent;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.5) 0%,
+    transparent 35%,
+    transparent 75%,
+    #DE9945 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation-name: flash;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  animation-duration: 4s;
+  animation-fill-mode: both;
+  animation-timing-function: linear;
+}
+
+@keyframes shine {
+  0% {
+    background-position: -50rem 0;
   }
+  25% {
+    background-position: -50rem 0;
+  }
+  100% {
+    background-position: 30rem 0;
+  }
+}
+
+@keyframes flash {
+  0% {
+    opacity: 1;
+  }
+  10% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  90% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
