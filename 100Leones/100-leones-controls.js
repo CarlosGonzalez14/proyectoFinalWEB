@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const sectionContainers = document.querySelectorAll('.section-container');
     
     try {
-      const idPregunta = 5; 
+      const idPregunta = 4; 
       const { respuestas } = await ipcRenderer.invoke('obtener-datos-100-leones', idPregunta);
   
       if(respuestas){
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     const answerContainer = sectionContainer.querySelector('.answer-container');
                     const scoreContainer = sectionContainer.querySelector('.score-container');
                     const button = sectionContainer.querySelector('.button-pushable');
-        
+
                     answerContainer.textContent = respuestas[index].respuesta;
                     scoreContainer.textContent = respuestas[index].puntaje;
 
