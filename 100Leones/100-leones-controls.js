@@ -32,8 +32,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
 export function showAnswer(button) {
-   console.log(button.dataset); 
    ipcRenderer.send('revelar-respuesta', button.dataset.id_respuesta, button.dataset.puntaje);
+   button.classList.add('pressed');
+   button.setAttribute('disabled', 'true');
 }
 
 window.showAnswer = showAnswer;

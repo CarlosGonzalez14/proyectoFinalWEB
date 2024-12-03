@@ -34,7 +34,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
-ipcRenderer.on('visibilizar-respuesta', (event, id_respuesta) => {
+var main_score = 0;
+
+ipcRenderer.on('visibilizar-respuesta', (event, id_respuesta, puntaje) => {
     const answerHidden = document.querySelector('#answer-hidden-'+id_respuesta);
+    const mainScoreboard = document.querySelector('.main-score');
+
     answerHidden.classList.add('visible');
+    
+    main_score= parseInt(main_score) + parseInt(puntaje);
+    mainScoreboard.textContent = main_score.toString();
 });
