@@ -1,12 +1,13 @@
 const { count } = require('console');
 const { ipcRenderer } = require('electron');
 
+let idPregunta = 10;
+
 document.addEventListener('DOMContentLoaded', async () => {
-  const idPregunta = 4;
-  await cargarDatosPregunta(idPregunta);
+  await reiniciarTablero();
 });
 
-async function cargarDatosPregunta(idPregunta) {
+async function reiniciarTablero() {
   const questionText = document.querySelector('#question');
   const answerBoxes = document.querySelectorAll('.answer-box');
 
@@ -23,8 +24,9 @@ async function cargarDatosPregunta(idPregunta) {
       answerBoxes.forEach((answerBox, index) => {
         const answerHidden = answerBox.querySelector('.answer-hidden');
         answerHidden.classList.remove('visible');
-        
+
         if (respuestas[index]) {
+          answerBox.classList.remove('invisible');
           const answerTextBox = answerBox.querySelector('.answer-text');
           const answerPointsBox = answerBox.querySelector('.answer-points');
 
@@ -37,12 +39,14 @@ async function cargarDatosPregunta(idPregunta) {
         }
       });
     }
+
+    ++idPregunta;
   } catch (error) {
     console.error('Error obteniendo los datos desde el renderer:', error);
   }
 }
 
-var main_score = 0;
+var main_score = 0, green_score = 0, red_score = 0;
 
 ipcRenderer.on('visibilizar-respuesta', (event, id_respuesta, puntaje) => {
     const answerHidden = document.querySelector('#answer-hidden-'+id_respuesta);
@@ -56,9 +60,9 @@ ipcRenderer.on('visibilizar-respuesta', (event, id_respuesta, puntaje) => {
 
 ipcRenderer.on('terminar-partida', async () => {
   const mainScoreboard = document.querySelector('.main-score');
+
   main_score= 0;
   mainScoreboard.textContent = main_score.toString();
 
-  const idPregunta = 5;
-  await cargarDatosPregunta(idPregunta);
+  await reiniciarTablero();
 });

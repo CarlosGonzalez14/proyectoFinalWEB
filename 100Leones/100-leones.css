@@ -214,8 +214,9 @@ body, html {
     align-items: center;
     justify-content: center;
     margin-top: 40px;
+    gap: 10px;
   }
-  
+
   .button-pushable {
     position: relative;
     border: none;
@@ -353,4 +354,8 @@ body, html {
   .button-pushable.pressed {
     pointer-events: none;
     cursor: default;
+  }
+
+  .error-button {
+    margin: 10px;
   }
